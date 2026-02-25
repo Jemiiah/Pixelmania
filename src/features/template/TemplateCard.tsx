@@ -1,5 +1,4 @@
 import type { Template } from '@/lib/types.ts'
-import { pixelPalette } from '@/design/tokens.ts'
 import { Button } from '@/components/ui/Button.tsx'
 import clsx from 'clsx'
 
@@ -9,48 +8,39 @@ interface TemplateCardProps {
   onApply: (template: Template) => void
 }
 
-function thumbnailColor(pixels: Uint8Array): string {
-  const idx = pixels[0] ?? 1
-  return pixelPalette[idx]?.hex ?? '#ffffff'
-}
-
 export function TemplateCard({ template, isSelected, onApply }: TemplateCardProps) {
   return (
     <div
       className={clsx(
-        'rounded-lg border p-3 transition-all duration-150',
+        'rounded-lg p-3 transition-all duration-200 web3-card',
         isSelected
-          ? 'border-primary-500 bg-primary-500/5 shadow-glow-primary'
-          : 'border-border-default bg-bg-surface hover:border-border-strong',
+          ? 'gradient-border-animated shadow-glow-primary'
+          : 'border border-border-subtle hover:border-border-strong hover:shadow-md',
       )}
     >
       {/* Thumbnail */}
-      <div
-        className="mb-2 flex h-20 items-center justify-center rounded-md"
-        style={{ backgroundColor: thumbnailColor(template.pixels) + '33' }}
-      >
-        <div
-          className="rounded"
-          style={{
-            width: Math.min(template.width * 3, 60),
-            height: Math.min(template.height * 3, 48),
-            backgroundColor: thumbnailColor(template.pixels),
-          }}
-        />
+      <div className="mb-2 flex h-20 items-center justify-center rounded-md bg-bg-base/80 overflow-hidden">
+        {template.thumbnail ? (
+          <img
+            src={template.thumbnail}
+            alt={template.name}
+            className="pixel-render max-h-full max-w-full object-contain"
+          />
+        ) : (
+          <span className="text-2xl opacity-30">🎨</span>
+        )}
       </div>
 
-      {/* Info */}
       <h4 className="text-sm font-semibold text-text-primary truncate">
         {template.name}
       </h4>
       <p className="mt-0.5 text-xs text-text-secondary">
         by {template.creator}
       </p>
-      <p className="text-xs text-text-tertiary">
-        {template.width}x{template.height}px
+      <p className="text-[10px] font-mono text-text-tertiary">
+        {template.width}&times;{template.height}px
       </p>
 
-      {/* Apply button */}
       <Button
         variant={isSelected ? 'secondary' : 'primary'}
         size="sm"

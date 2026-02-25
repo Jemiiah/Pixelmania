@@ -5,17 +5,19 @@ export function PrizePool() {
   const prizePool = useSeasonStore((s) => s.currentSeason.prizePool)
 
   return (
-    <div className="flex items-center gap-3 rounded-lg border border-tertiary-700/50 bg-tertiary-900/30 px-4 py-3">
-      <span className="text-2xl" role="img" aria-label="Trophy">
-        &#x1F3C6;
-      </span>
-      <div className="flex flex-col">
-        <span className="text-xs font-medium uppercase tracking-wider text-tertiary-400">
-          Prize Pool
-        </span>
-        <span className="animate-glow-pulse font-mono text-xl font-bold text-tertiary-300">
-          {formatNumber(prizePool)} G$
-        </span>
+    <div className="relative overflow-hidden rounded-xl gradient-border">
+      <div className="flex items-center gap-3 bg-gradient-to-r from-tertiary-900/60 to-bg-elevated px-4 py-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-tertiary-500/20">
+          <span className="text-xl">&#x1F3C6;</span>
+        </div>
+        <div className="flex flex-col">
+          <span className="text-[10px] font-semibold uppercase tracking-widest text-tertiary-400">
+            Prize Pool
+          </span>
+          <span className="font-mono text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-tertiary-300 to-tertiary-500">
+            {formatNumber(prizePool)} G$
+          </span>
+        </div>
       </div>
     </div>
   )

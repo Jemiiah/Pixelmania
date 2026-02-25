@@ -16,14 +16,17 @@ function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[20] h-14 glass flex items-center px-4 gap-4">
+      {/* Gradient bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-500/40 to-transparent" />
       {/* Logo */}
-      <Link to="/" className="flex items-center gap-2 shrink-0">
-        <div className="w-8 h-8 rounded-md bg-primary-500/20 border border-primary-500/40 flex items-center justify-center">
-          <div className="w-3 h-3 bg-primary-500 rounded-sm shadow-[0_0_8px_rgba(0,230,118,0.5)]" />
+      <Link to="/" className="flex items-center gap-2 shrink-0 group">
+        <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500/30 to-secondary-500/20 border border-primary-500/30 flex items-center justify-center overflow-hidden group-hover:shadow-glow-primary transition-shadow duration-300">
+          <div className="w-3 h-3 bg-primary-500 rounded-sm shadow-[0_0_12px_rgba(0,230,118,0.6)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-500/10 to-transparent" />
         </div>
         <span className="text-lg font-bold text-text-primary tracking-tight">
           Pixel
-          <span className="text-primary-500 drop-shadow-[0_0_8px_rgba(0,230,118,0.4)]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-500 drop-shadow-[0_0_12px_rgba(0,230,118,0.5)]">
             mania
           </span>
         </span>

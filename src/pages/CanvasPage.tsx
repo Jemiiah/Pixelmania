@@ -18,11 +18,11 @@ function CanvasPage() {
   return (
     <div className="relative flex h-[calc(100vh-56px)] flex-col">
       {/* Season info bar */}
-      <div className="flex flex-wrap items-center gap-3 px-4 py-2 border-b border-border-subtle bg-bg-surface/50">
+      <div className="flex flex-wrap items-center gap-3 px-4 py-2 border-b border-border-subtle bg-bg-surface/30 backdrop-blur-sm">
         <div className="flex-1 min-w-0">
           <SeasonBanner />
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           <SeasonTimer />
           <PrizePool />
         </div>
@@ -35,37 +35,40 @@ function CanvasPage() {
 
         {/* Wallet gate overlay */}
         {!isConnected && (
-          <div className="absolute inset-0 z-[5] flex items-center justify-center bg-bg-base/60 backdrop-blur-sm">
-            <div className="flex flex-col items-center gap-4 rounded-xl border border-border-default bg-bg-surface p-8 shadow-lg text-center max-w-sm">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-500/10">
-                <svg className="h-8 w-8 text-primary-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <div className="absolute inset-0 z-[5] flex items-center justify-center bg-bg-base/70 backdrop-blur-md">
+            <div className="relative flex flex-col items-center gap-5 rounded-2xl p-10 text-center max-w-md gradient-border-animated web3-card noise-bg">
+              <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500/20 to-secondary-500/10">
+                <svg className="h-10 w-10 text-primary-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <rect x="2" y="6" width="20" height="14" rx="3" />
                   <path d="M2 10h20" />
                   <circle cx="17" cy="15" r="1.5" fill="currentColor" />
                 </svg>
+                <div className="absolute inset-0 rounded-2xl animate-glow-pulse opacity-40" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-text-primary">Connect to Place Pixels</h3>
-                <p className="mt-1 text-sm text-text-secondary">
-                  Connect your wallet to start creating pixel art and earn G$ rewards.
+                <h3 className="text-xl font-bold text-text-primary">Connect to Place Pixels</h3>
+                <p className="mt-2 text-sm text-text-secondary leading-relaxed">
+                  Connect your wallet to start creating pixel art on the Celo blockchain and earn G$ rewards.
                 </p>
               </div>
               <button
                 onClick={() => setWalletModalOpen(true)}
-                className="rounded-md bg-primary-500 px-6 py-2.5 text-sm font-medium text-text-inverse transition-all hover:bg-primary-600 hover:shadow-glow-primary"
+                className="relative rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 px-8 py-3 text-sm font-semibold text-text-inverse transition-all hover:shadow-glow-primary hover:scale-[1.02] active:scale-[0.98]"
               >
-                Connect Wallet
+                <span className="relative z-10">Connect Wallet</span>
               </button>
+              <p className="text-xs text-text-tertiary">Supports MetaMask, Valora & GoodWallet</p>
             </div>
           </div>
         )}
       </div>
 
-      {/* Bottom palette bar (mobile) or side palette */}
+      {/* Palette panel */}
       <div
         className={clsx(
-          'border-t border-border-subtle bg-bg-surface',
-          isMobile ? 'px-3 py-2' : 'absolute left-4 bottom-16 z-10 rounded-lg border border-border-default bg-bg-surface/90 backdrop-blur-sm p-3 shadow-lg',
+          isMobile
+            ? 'border-t border-border-subtle bg-bg-surface/90 backdrop-blur-sm px-3 py-2'
+            : 'absolute left-4 bottom-16 z-10 rounded-xl web3-card gradient-border p-3 shadow-lg',
         )}
       >
         <ColorPalette />

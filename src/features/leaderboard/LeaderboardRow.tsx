@@ -7,10 +7,10 @@ interface LeaderboardRowProps {
   isCurrentUser?: boolean
 }
 
-const rankColors: Record<number, string> = {
-  1: 'text-tertiary-400',
-  2: 'text-[#c0c0c0]',
-  3: 'text-[#cd7f32]',
+const rankBg: Record<number, string> = {
+  1: 'bg-gradient-to-r from-tertiary-500/20 to-transparent',
+  2: 'bg-gradient-to-r from-[#c0c0c0]/10 to-transparent',
+  3: 'bg-gradient-to-r from-[#cd7f32]/10 to-transparent',
 }
 
 const rankLabels: Record<number, string> = {
@@ -19,47 +19,47 @@ const rankLabels: Record<number, string> = {
   3: '\u{1F949}',
 }
 
-function addressToColor(address: string): string {
-  const hash = address.slice(2, 8)
-  return `#${hash}`
+function addressToHue(address: string): number {
+  let hash = 0
+  for (let i = 2; i < 8; i++) hash = address.charCodeAt(i) + ((hash << 5) - hash)
+  return Math.abs(hash) % 360
 }
 
 export function LeaderboardRow({ entry, isCurrentUser }: LeaderboardRowProps) {
   const { rank, user, pixelsPlaced } = entry
+  const hue = addressToHue(user.address)
 
   return (
     <div
       className={clsx(
-        'flex items-center gap-3 rounded-md px-3 py-2 transition-colors duration-150',
+        'flex items-center gap-3 rounded-lg px-3 py-2.5 transition-all duration-200',
         isCurrentUser
-          ? 'bg-primary-500/10 border border-primary-500/20'
-          : 'hover:bg-bg-elevated',
+          ? 'bg-primary-500/10 border border-primary-500/20 shadow-glow-primary'
+          : rankBg[rank] ?? 'hover:bg-bg-elevated/60',
       )}
     >
-      {/* Rank */}
-      <span
-        className={clsx(
-          'w-7 shrink-0 text-center text-sm font-bold',
-          rankColors[rank] ?? 'text-text-tertiary',
-        )}
-      >
+      <span className="w-7 shrink-0 text-center text-sm font-bold text-text-tertiary">
         {rankLabels[rank] ?? rank}
       </span>
 
-      {/* Avatar */}
+      {/* Avatar with gradient ring */}
       <div
-        className="h-7 w-7 shrink-0 rounded-full"
-        style={{ backgroundColor: addressToColor(user.address) }}
-      />
+        className="h-8 w-8 shrink-0 rounded-full p-[2px]"
+        style={{ background: `linear-gradient(135deg, hsl(${hue}, 70%, 60%), hsl(${hue + 60}, 70%, 50%))` }}
+      >
+        <div
+          className="h-full w-full rounded-full"
+          style={{ backgroundColor: `hsl(${hue}, 50%, 35%)` }}
+        />
+      </div>
 
-      {/* Username */}
       <span className="min-w-0 flex-1 truncate text-sm font-medium text-text-primary">
         {user.username}
       </span>
 
-      {/* Pixel count */}
-      <span className="shrink-0 text-xs font-mono text-text-secondary">
-        {formatNumber(pixelsPlaced)} px
+      <span className="shrink-0 text-xs font-mono text-text-secondary tabular-nums">
+        {formatNumber(pixelsPlaced)}
+        <span className="text-text-tertiary ml-0.5">px</span>
       </span>
     </div>
   )

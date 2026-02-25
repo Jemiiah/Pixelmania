@@ -27,7 +27,7 @@ function Sidebar() {
     <aside
       className={clsx(
         'fixed top-14 right-0 bottom-0 w-80 z-[10]',
-        'bg-bg-surface border-l border-border-subtle',
+        'bg-gradient-to-b from-bg-surface to-bg-base border-l border-border-subtle',
         'transition-transform duration-300 ease-[cubic-bezier(0,0,0.2,1)]',
         sidebarOpen ? 'translate-x-0' : 'translate-x-full',
       )}

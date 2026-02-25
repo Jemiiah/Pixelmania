@@ -27,7 +27,7 @@ interface CanvasState {
 }
 
 export const useCanvasStore = create<CanvasState>((set, get) => ({
-  pixels: new Uint8Array(CANVAS_PIXEL_COUNT).fill(1),
+  pixels: new Uint8Array(CANVAS_PIXEL_COUNT).fill(0),
   zoom: ZOOM_DEFAULT,
   offset: { x: 0, y: 0 },
   gridVisible: true,

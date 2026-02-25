@@ -26,7 +26,7 @@ export function PixelCanvas() {
   useEffect(() => {
     const mockData = generateMockCanvas()
     for (let i = 0; i < mockData.length; i++) {
-      if (mockData[i] !== 1) {
+      if (mockData[i] !== 0) {
         const x = i % CANVAS_SIZE
         const y = (i / CANVAS_SIZE) | 0
         setPixel(x, y, mockData[i])
