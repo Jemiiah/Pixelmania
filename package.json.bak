@@ -1,0 +1,15 @@
+{
+  "name": "pixelmania-contracts",
+  "version": "0.1.0",
+  "description": "Pixelmania smart contracts - collaborative pixel art on Celo",
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test",
+    "test:vv": "forge test -vvv",
+    "deploy": "forge script script/Deploy.s.sol:Deploy",
+    "deploy:alfajores": "forge script script/Deploy.s.sol:Deploy --rpc-url $ALFAJORES_RPC_URL --broadcast --private-key $PRIVATE_KEY",
+    "deploy:celo": "forge script script/Deploy.s.sol:Deploy --rpc-url $CELO_RPC_URL --broadcast --private-key $PRIVATE_KEY",
+    "clean": "forge clean"
+  },
+  "license": "MIT"
+}
