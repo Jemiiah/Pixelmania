@@ -36,7 +36,7 @@ contract PixelmaniaTest is Test {
     function test_Constants() public view {
         assertEq(pixelmania.G_TOKEN(), 0x62B8B11039FcfE5aB0C56E502b1C372A3d2a9c7A);
         assertEq(pixelmania.CANVAS_SIZE(), 512);
-        assertEq(pixelmania.PLACEMENT_FEE(), 1e18);
+        assertEq(pixelmania.PLACEMENT_FEE(), 1e17); // 0.1 G$
     }
 
     function test_PositionOf() public view {

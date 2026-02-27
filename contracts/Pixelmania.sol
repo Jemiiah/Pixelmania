@@ -10,7 +10,7 @@ contract Pixelmania is Ownable, ReentrancyGuard, Pausable {
     address public constant G_TOKEN = 0x62B8B11039FcfE5aB0C56E502b1C372A3d2a9c7A;
     address public constant CFA_FORWARDER = 0xcfA132E353cB4E398080B9700609bb008eceB125;
     uint256 public constant CANVAS_SIZE = 512;
-    uint256 public constant PLACEMENT_FEE = 1e18;
+    uint256 public constant PLACEMENT_FEE = 1e17; // 0.1 G$
     int96 public constant MIN_ARMOR_FLOW_RATE = 11_574_074_074_074_074;
 
     uint256 private constant FEE_PRIZE_BPS = 8000;

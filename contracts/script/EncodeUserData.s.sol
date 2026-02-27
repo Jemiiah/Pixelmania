@@ -10,6 +10,6 @@ contract EncodeUserData is Script {
         userData = PixelmaniaUserData.encode(x, y, color);
         console.log("userData (hex):");
         console.logBytes(userData);
-        console.log("Use this with IERC777(G_TOKEN).send(Pixelmania, 1e18, userData)");
+        console.log("Use this with IERC777(G_TOKEN).send(Pixelmania, 1e17, userData)"); // 0.1 G$
     }
 }
